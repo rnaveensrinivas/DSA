@@ -24,6 +24,24 @@ def tokenizer(expression: str) -> List[str]:
     # Strip whitespace and remove empty tokens
     return [token.strip() for token in tokens if token.strip()]
 
+def html_tokenizer(html_script: str) -> List[str]:
+    """Given an HTML script, return all the tags.
+
+    Args:
+        html_script (str): The HTML script as a string.
+
+    Returns:
+        List[str]: A list of HTML tags found in the script.
+        
+    Notes:
+        - <[^>]+> matches any string that starts with <, includes any characters 
+        except >, and ends with >.
+    
+    """
+    # Regular expression to match HTML tags
+    tag_pattern = r"<[^>]+>"
+    return re.findall(tag_pattern, html_script)
+
 
 def valid_token(token: str, 
                 match_variables: bool = True,
@@ -100,3 +118,64 @@ assert valid_token("1x") == False, "Failed for invalid token '1x' (number and va
 assert valid_token("123abc") == False, "Failed for invalid token '123abc' (number and letters mixed)"
 assert valid_token("") == False, "Failed for empty string ''"
 assert valid_token("!@#") == False, "Failed for invalid characters '!@#'"
+
+
+
+# Basic HTML structure
+assert html_tokenizer("<html><head></head><body></body></html>") == [
+    "<html>", "<head>", "</head>", "<body>", "</body>", "</html>"
+]
+
+# Nested tags with content
+assert html_tokenizer("<div><p>Hello, World!</p></div>") == [
+    "<div>", "<p>", "</p>", "</div>"
+]
+
+# Self-closing tags
+assert html_tokenizer("<img src='image.jpg' /><br/>") == [
+    "<img src='image.jpg' />", "<br/>"
+]
+
+# Mixed tags and text
+assert html_tokenizer("<h1>Title</h1><p>Paragraph</p>") == [
+    "<h1>", "</h1>", "<p>", "</p>"
+]
+
+# Tags with attributes
+assert html_tokenizer("<a href='https://example.com'>Link</a>") == [
+    "<a href='https://example.com'>", "</a>"
+]
+
+# Multiple attributes
+assert html_tokenizer("<input type='text' name='username' />") == [
+    "<input type='text' name='username' />"
+]
+
+# Unusual spacing
+assert html_tokenizer("< div >Content</ div >") == [
+    "< div >", "</ div >"
+]
+
+# Empty string (edge case)
+assert html_tokenizer("") == []
+
+# No tags, only plain text
+assert html_tokenizer("This is just plain text.") == []
+
+# Malformed tags
+assert html_tokenizer("<div><p>Unclosed div") == [
+    "<div>", "<p>"
+]
+
+# Comments in HTML
+assert html_tokenizer("<!-- This is a comment -->") == [
+    "<!-- This is a comment -->"
+]
+
+# Special cases
+assert html_tokenizer("<!DOCTYPE html>") == [
+    "<!DOCTYPE html>"
+]
+assert html_tokenizer("<script>var x = 10;</script>") == [
+    "<script>", "</script>"
+]

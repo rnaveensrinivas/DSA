@@ -41,18 +41,14 @@ Check out the [implementation](./Stack/Stack.py) of stack using lists with top a
 This flexibility in implementation demonstrates the power of abstraction, allowing different physical representations while maintaining the logical behavior of the stack. However, performance varies significantly, with the first implementation being more efficient for push and pop operations, especially for large stacks.
 
 ---
-
-## Stack Applications
-
-### Reversing a String
+## Stack Applications: Reversing a String
 
 One of the key properties of a stack is its ability to reverse the order of elements. This property can be leveraged to reverse a string efficiently using a stack. 
 
 For an example of how to reverse a string using a stack, refer to the implementation in [reverse-string.py](./Stack/reverseString.py).
 
 ---
-
-### Simple Balanced Parentheses
+## Stack Applications: Simple Balanced Parentheses
 
 In programming languages like Lisp, parentheses are used to structure expressions and functions. For instance:
 
@@ -70,8 +66,7 @@ To determine if a string of parentheses is balanced, observe that closing parent
 Here is the link [link](./Stack/simpleBalancedParantheses.py) to implementation.
 
 ----
-
-### Balanced Symbols
+## Stack Applications: Balanced Symbols
 
 The problem of balanced parentheses is a specific case of a more general issue in programming languages, where different types of symbols (e.g., parentheses `()`, square brackets `[]`, and curly braces `{}`) need to be balanced and nested correctly. These symbols often represent different constructs in languages, such as lists, sets, dictionaries, and tuples in Python.
 
@@ -80,8 +75,7 @@ To solve this problem, a stack can be used: every opening symbol is pushed onto 
 The concept of balanced symbols is essential in processing various language constructs in computer science. Stacks are useful for handling such problems, and this method extends easily to more complex cases beyond just parentheses.
 
 ---
-
-### Converting Decimal Numbers to any Base
+## Stack Applications: Converting Decimal Numbers to any Base
 
 Converting decimal numbers to any base, such as binary, octal, or hexadecimal, can be efficiently performed using a stack-based algorithm. The process involves repeatedly dividing the decimal number by the target base and storing the remainders in a stack. Each remainder corresponds to a digit in the new base, with the first remainder representing the least significant digit. After all divisions are completed, the stack contains the digits in reverse order, so the digits are popped off in sequence to form the final representation of the number in the desired base. 
 
@@ -103,7 +97,7 @@ Just look at remainder and the position column, think deep, you will get the int
 
 ---
 
-### Infix, Prefix, and Postfix Expressions
+## Stack Applications: Infix, Prefix, and Postfix Expressions
 
 When you write an arithmetic expression like $B * C$, the form of the expression helps you interpret it correctly. In this case, the multiplication operator $*$ appears between the two operands $B$ and $C$, so you know that $B$ is multiplied by $C$. This is called an **infix expression** because the operator is placed between the operands.
 
@@ -121,25 +115,25 @@ In **prefix notation**, operators come before their operands, and in **postfix n
 
 Here are some examples comparing infix, prefix, and postfix notations:
 
-| **Infix Expression**   | **Prefix Expression**     | **Postfix Expression**   |
-|------------------------|---------------------------|--------------------------|
-| $A + B$            | $+ A B$               | $A B +$              |
-| $A + B * C$    | $+ A * B C$       | $A B C * +$      |
-| $(A + B) * C$  | $* + A B C$       | $A B + C *$      |
-| $A + B * C + D$ | $+ + A * B C D$   | $A B C * + D +$  |
-| $(A + B) * (C + D)$ | $* + A B + C D$ | $A B + C D + *$  |
-| $A * B + C * D$ | $+ * A B * C D$ | $A B * C D * +$ |
-| $A + B + C + D$    | $+ + + A B C D$       | $A B + C + D +$      |
+| **Infix Expression** | **Prefix Expression** | **Postfix Expression** |
+|----------------------|-----------------------|------------------------|
+| $A + B$              | $+ A B$               | $A B +$                |
+| $A + B * C$          | $+ A * B C$           | $A B C * +$            |
+| $(A + B) * C$        | $* + A B C$           | $A B + C *$            |
+| $A + B * C + D$      | $+ + A * B C D$       | $A B C * + D +$        |
+| $(A + B) * (C + D)$  | $* + A B + C D$       | $A B + C D + *$        |
+| $A * B + C * D$      | $+ * A B * C D$       | $A B * C D * +$        |
+| $A + B + C + D$      | $+ + + A B C D$       | $A B + C + D +$        |
 
-#### Key Observations:
+**Key Observations**:
 - **Prefix and Postfix expressions** don’t require parentheses since the position of operators completely determines the order of operations.
 - In contrast, **infix expressions** require parentheses to clarify precedence.
   
-Prefix and postfix notations eliminate ambiguity and can be easier for computers to process.
+Prefix and postfix notations eliminate ambiguity and can be easier for computers to process within a **single pass**.
 
 --- 
 
-#### Converting Infix Expressions to Prefix or Postfix (By Hand)
+### Converting Infix Expressions to Prefix or Postfix (By Hand)
 To convert an infix expression to prefix or postfix notation by hand, follow these steps:
 
 1. **Fully Parenthesize the Infix Expression**:  
@@ -171,9 +165,9 @@ This gives the final converted expressions:
 - **Prefix**: $* + A B + C D$
 - **Postfix**: $A B + C D + *$
 
-This method can be applied to any infix expression to convert it to prefix or postfix notation.
+---
 
-#### General Algorithm for Converting Infix to Postfix
+### General Algorithm for Converting Infix to Postfix
 
 The algorithm below describes how to convert an infix expression (e.g., `(A + B) * C`) to postfix notation (e.g., `AB+C*`) using a stack:
 
@@ -237,7 +231,7 @@ Final postfix expression: `AB+C*D/`.
 
 ---
 
-#### Evaluating Postfix Expressions
+### Evaluating Postfix Expressions
 
 Here is an algorithm to to evaluate postfix expressions:
 
@@ -293,7 +287,7 @@ For the postfix expression `["3", "4", "+", "2", "*", "7", "/"]`:
 
 ---
 
-#### Why Use Polish and Reverse Polish Notation?
+### Why Use Polish and Reverse Polish Notation?
 
 The primary reason for using **Polish Notation (PN)** and **Reverse Polish Notation (RPN)** is that they enable **efficient evaluation** and **problem-solving in a single pass**, avoiding the complexities of parsing, parentheses handling, and operator precedence.
 
@@ -317,6 +311,5 @@ The primary reason for using **Polish Notation (PN)** and **Reverse Polish Notat
   - **Embedded systems** needing low-latency computation.
 
 ---
-
 
 # Take a look at [Exercises](./Exercises.md)

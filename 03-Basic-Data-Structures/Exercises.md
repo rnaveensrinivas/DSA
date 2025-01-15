@@ -107,7 +107,6 @@ Binary: $(1100000)_2$
 </details>
 
 ### 4. Convert the above infix expressions to postfix using the direct conversion algorithm. Show the stack as the conversion takes place.
-##Needs to be fixed
 <details>
 <summary>Click to view answer</summary>
 ### 4. Convert the above infix expressions to postfix using the direct conversion algorithm. Show the stack as the conversion takes place.
@@ -141,24 +140,24 @@ Binary: $(1100000)_2$
 
 #### Expression 2: $A + ((B + C) * (D + E))$  
 
-| Step | Symbol  | Stack         | Postfix          |
-|------|---------|---------------|------------------|
-| 1    | `A`     |               | `A`              |
-| 2    | `+`     | +             | `A`              |
-| 3    | `(`     | (+            | `A`              |
-| 4    | `(`     | (+            | `A`              |
-| 5    | `B`     | (+            | `A B`            |
-| 6    | `+`     | (+ +          | `A B`            |
-| 7    | `C`     | (+ +          | `A B C`          |
-| 8    | `)`     | (+            | `A B C +`        |
-| 9    | `*`     | (+*           | `A B C +`        |
-| 10   | `(`     | (+*           | `A B C +`        |
-| 11   | `D`     | (+*           | `A B C + D`      |
-| 12   | `+`     | (+*+          | `A B C + D`      |
-| 13   | `E`     | (+*+          | `A B C + D E`    |
-| 14   | `)`     | (+*           | `A B C + D E +`  |
-| 15   | `)`     | (+            | `A B C + D E + *`|
-| 16   | End     |               | `A B C + D E + * +`|
+| Step | Symbol | Stack   | Postfix            |
+|------|--------|-------- |--------------------|
+| 1    | `A`    |         | `A`                |
+| 2    | `+`    | `+`     | `A`                |
+| 3    | `(`    | `+(`    | `A`                |
+| 4    | `(`    | `+((`   | `A`                |
+| 5    | `B`    | `+((`   | `A B`              |
+| 6    | `+`    | `+((+`  | `A B`              |
+| 7    | `C`    | `+((+`  | `A B C`            |
+| 8    | `)`    | `+(`    | `A B C +`          |
+| 9    | `*`    | `+(*`   | `A B C +`          |
+| 10   | `(`    | `+(*(`  | `A B C +`          |
+| 11   | `D`    | `+(*(`  | `A B C + D`        |
+| 12   | `+`    | `+(*(+` | `A B C + D`        |
+| 13   | `E`    | `+(*(+` | `A B C + D E`      |
+| 14   | `)`    | `+(*`   | `A B C + D E +`    |
+| 15   | `)`    | `+`     | `A B C + D E + *`  |
+| 16   | End    |         | `A B C + D E + * +`|
 
 **Postfix**: $A B C + D E + * +$  
 
@@ -166,20 +165,20 @@ Binary: $(1100000)_2$
 
 #### Expression 3: $A * B * C * D + E + F$  
 
-| Step | Symbol  | Stack         | Postfix          |
-|------|---------|---------------|------------------|
-| 1    | `A`     |               | `A`              |
-| 2    | `*`     | *             | `A`              |
-| 3    | `B`     | *             | `A B`            |
-| 4    | `*`     | **            | `A B *`          |
-| 5    | `C`     | **            | `A B * C`        |
-| 6    | `*`     | ***           | `A B * C *`      |
-| 7    | `D`     | ***           | `A B * C * D`    |
-| 8    | `+`     | +             | `A B * C * D *`  |
-| 9    | `E`     | +             | `A B * C * D * E`|
-| 10   | `+`     | ++            | `A B * C * D * E +`|
-| 11   | `F`     | ++            | `A B * C * D * E + F`|
-| 12   | End     |               | `A B * C * D * E + F +`|
+| Step | Symbol | Stack | Postfix                |
+|------|--------|-------|------------------------|
+| 1    | `A`    |       | `A`                    |
+| 2    | `*`    | `*`   | `A`                    |
+| 3    | `B`    | `*`   | `A B`                  |
+| 4    | `*`    | `*`   | `A B *`                |
+| 5    | `C`    | `*`   | `A B * C`              |
+| 6    | `*`    | `*`   | `A B * C *`            |
+| 7    | `D`    | `*`   | `A B * C * D`          |
+| 8    | `+`    | `+`   | `A B * C * D *`        |
+| 9    | `E`    | `+`   | `A B * C * D * E`      |
+| 10   | `+`    | `+`   | `A B * C * D * E +`    |
+| 11   | `F`    | `+`   | `A B * C * D * E + F`  |
+| 12   | End    |       | `A B * C * D * E + F +`|
 
 **Postfix**: $A B * C * D * E + F +$  
 
@@ -190,6 +189,60 @@ Binary: $(1100000)_2$
 - 2 3 · 4 +
 - 1 2 + 3 + 4 + 5 +
 - 1 2 3 4 5 · + · +
+
+<details>
+<summary>Click to view answer</summary>
+
+### 1. Expression: **2 3 · 4 +**
+
+| Step | Action              | Stack  |
+|------|---------------------|--------|
+| 1    | Push 2              | [2]    |
+| 2    | Push 3              | [2, 3] |
+| 3    | Process `·` (2 · 3) | [6]    |
+| 4    | Push 4              | [6, 4] |
+| 5    | Process `+` (6 + 4) | [10]   |
+
+**Final Result**: **10**
+
+---
+
+### 2. Expression: **1 2 + 3 + 4 + 5 +**
+
+| Step | Action               | Stack   |
+|------|----------------------|---------|
+| 1    | Push 1               | [1]     |
+| 2    | Push 2               | [1, 2]  |
+| 3    | Process `+` (1 + 2)  | [3]     |
+| 4    | Push 3               | [3, 3]  |
+| 5    | Process `+` (3 + 3)  | [6]     |
+| 6    | Push 4               | [6, 4]  |
+| 7    | Process `+` (6 + 4)  | [10]    |
+| 8    | Push 5               | [10, 5] |
+| 9    | Process `+` (10 + 5) | [15]    |
+
+**Final Result**: **15**
+
+---
+
+### 3. Expression: **1 2 3 4 5 · + · +**
+
+| Step | Action                 | Stack           |
+|------|------------------------|-----------------|
+| 1    | Push 1                 | [1]             |
+| 2    | Push 2                 | [1, 2]          |
+| 3    | Push 3                 | [1, 2, 3]       |
+| 4    | Push 4                 | [1, 2, 3, 4]    |
+| 5    | Push 5                 | [1, 2, 3, 4, 5] |
+| 6    | Process `·` (4 · 5)    | [1, 2, 3, 20]   |
+| 7    | Process `+` (3 + 20)   | [1, 2, 23]      |
+| 8    | Process `·` (2 · 23)   | [1, 46]         |
+| 9    | Process `+` (1 + 46)   | [47]            |
+
+**Final Result**: **47**
+
+---
+</details>
 
 ### 6. The alternative implementation of the queue ADT is to use a list such that the rear of the queue is at the end of the list. What would this mean for Big-O performance?
 
@@ -209,6 +262,7 @@ Binary: $(1100000)_2$
 #### [Code](./Stack/infixEvaluation.py)
 
 ### 13. Turn your direct infix evaluator from the previous problem into a calculator.
+#### [Code](./Stack/calculator.py)
 
 ### 14. Implement the queue ADT, using a list such that the rear of the queue is at the end of the list.
 
@@ -227,7 +281,7 @@ Be sure to state any assumptions that you make and provide any probabilistic dat
 
 ### 18. Implement a radix sorting machine. A radix sort for base 10 integers is a mechanical sorting technique that utilizes a collection of bins, one main bin and 10 digit bins. Each bin acts like a queue and maintains its values in the order that they arrive. The algorithm begins by placing each number in the main bin. Then it considers each value digit by digit. The first value is removed and placed in a digit bin corresponding to the digit being considered. For example, if the ones digit is being considered, 534 is placed in digit bin 4 and 667 is placed in digit bin 7. Once all the values are placed in the corresponding digit bins, the values are collected from bin 0 to bin 9 and placed back in the main bin. The process continues with the tens digit, the hundreds, and so on. After the last digit is processed, the main bin contains the values in order.
 
-### 19. Another example of the parentheses matching problem comes from Hypertext Markup Language (HTML). In HTML, tags exist in both opening and closing forms and must be balanced to properly describe a web document. This very simple HTML document:
+### 19. Another example of the parentheses matching problem comes from Hypertext Markup Language (HTML). In HTML, tags exist in both opening and closing forms and must be balanced to properly describe a web document. This very simple HTML document is intended only to show the matching and nesting structure for tags in the language. Write a program that can check an HTML document for proper opening and closing tags.:
 
 ```html
 <html>
@@ -243,7 +297,7 @@ Be sure to state any assumptions that you make and provide any probabilistic dat
 </html>
 ```
 
-is intended only to show the matching and nesting structure for tags in the language. Write a program that can check an HTML document for proper opening and closing tags.
+#### [Code](./Stack/html_tag_validator.py)
 
 ### 20. Extend the program from Listing 3.15 to handle palindromes with spaces. For example, I PREFER PI is a palindrome that reads the same forward and backward if you ignore the blank characters.
 
