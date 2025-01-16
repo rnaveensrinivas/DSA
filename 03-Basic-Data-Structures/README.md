@@ -31,7 +31,6 @@ The stack abstract data type (ADT) is an ordered LIFO (Last In, First Out) colle
 
 ## Implementing Stack 
 
-
 When we give an abstract data type a physical implementation, we refer to the implementation as a data structure.
 
 The stack, as an abstract data type, can have multiple physical implementations. One approach is to use a Python list with the stack's top at the end, utilizing efficient $O(1)$ operations like `append()` and `pop()`. Alternatively, the stack's top can be at the beginning of the list, requiring $O(n)$ operations like `insert(0)` and `pop(0)` due to the need to shift elements.
@@ -309,6 +308,94 @@ The primary reason for using **Polish Notation (PN)** and **Reverse Polish Notat
   - **Real-time calculators** that evaluate as input is entered.
   - **Streaming data** that requires immediate calculations.
   - **Embedded systems** needing low-latency computation.
+
+---
+
+# Queue
+
+A queue is an **ordered collection** where items are added at one end, called the **rear**, and removed from the other end, called the **front**. Items wait in the queue until it is their turn to be removed. This follows the **FIFO** (First In, First Out) principle, meaning the first item added is the first one removed. A real-life example is a line at a store or a movie theater, where people wait their turn and cannot cut in or leave early.
+
+Queues are also used in computer systems to manage processes. For example, operating systems use queues to schedule tasks efficiently. Keystrokes typed by a user are placed in a queue-like buffer when the system is busy, and they are eventually displayed on the screen in the correct order. The key characteristics of queues are their **restricted access** (only one way in and one way out) and their fair processing order.
+
+---
+
+## Queue Abstract Data Type
+
+The **queue abstract data type (ADT)** is an ordered collection of items where additions occur at the **rear** and removals occur at the **front**, maintaining the **FIFO (First In, First Out)** property. The key operations for a queue are:
+
+**Assumption**: Queue is implemented using **doubly linked list** with **head** and **tail** pointers.  
+Based on the underlying implementation data structure the complexities can vary. For example, if we use list as the underlying implementation data structure, then we would have $O(n)$ complexity in either enqueu() or dequeue() based on the choice of front and rear. 
+
+| **Method**      | **Description**                          | **Time Complexity** | **Space Complexity** |
+|-----------------|------------------------------------------|---------------------|----------------------|
+| `Queue()`       | Creates an empty queue                   | $O(1)$              | $O(1)$               |
+| `enqueue(item)` | Adds an item to the rear of the queue    | $O(1)$              | $O(1)$               |
+| `dequeue()`     | Removes and returns the front item       | $O(1)$              | $O(1)$               |
+| `is_empty()`    | Checks if the queue is empty             | $O(1)$              | $O(1)$               |
+| `size()`        | Returns the number of items in the queue | $O(1)$              | $O(1)$               |
+
+### Notes:
+- **Time complexity** for all queue operations is constant **$O(1)$**, as these operations involve adding or removing elements from the front or rear.
+- **Space complexity** is also **$O(1)$** for each operation, excluding the space required by the queue's internal storage (which scales with the number of elements).
+
+---
+
+## Implementing Queue
+
+You can find the implementation [here](./Queue/Queue.py). In this implementation, **list** is used as the internal data structure, with the **front** of the queue at the **0th index** and the **rear** at the end of the list. As a result, the **`dequeue()`** operation has a time complexity of **$O(n)$** due to the need to shift all elements after removal.
+
+---
+
+## Queue Applications: Hot Potato
+
+One classic application of a queue is simulating situations where data must be managed in a **First-In-First-Out (FIFO)** manner. A good example is the children's game **hot potato**, where children pass an item in a circle. When the music or action stops, the child holding the item is eliminated, and the game continues until only one child remains.
+
+This game is a modern version of the famous **Josephus problem**, which is based on a historical legend involving the first-century Jewish historian **Flavius Josephus**. During the Jewish revolt against Rome, Josephus and 39 comrades were trapped in a cave. Facing imminent defeat and capture, they decided to commit suicide rather than be enslaved. They arranged themselves in a circle and began eliminating every seventh person. Josephus, a skilled mathematician, deduced where he should sit in the circle to avoid being eliminated, ultimately surviving by joining the Roman side. 
+
+While the Josephus problem has many versions, with different numbers of people and elimination patterns, the underlying concept remains the same: a group of people arranged in a circle, with every nth person eliminated until only one person is left standing.
+
+For an implementation of the **Hot Potato game**, refer to this [code](./Queue/hotPotato.py).
+
+---
+
+# Deque
+
+A deque (double-ended queue) is an ordered collection of items that allows adding and removing elements from both ends (front and rear). This flexibility makes it a hybrid structure combining the functionalities of stacks and queues, without enforcing LIFO or FIFO orderings. Proper and consistent use of addition and removal operations is required to maintain the desired behavior.
+
+## Deque Abstract Data Type (ADT)
+
+The **deque abstract data type (ADT)** is an ordered collection of items where elements can be added or removed from both ends (front and rear). This makes the deque a flexible data structure supporting operations of both stacks and queues.
+
+**Assumption**: Deque is implemented using a **doubly linked list** with **head** and **tail** pointers.  
+Based on the underlying implementation data structure, the complexities may vary. For example, using a list as the implementation would result in $O(n)$ complexity for operations involving either end, depending on the choice of front and rear.
+
+| **Method**          | **Description**                                   | **Time Complexity** | **Space Complexity** |
+|----------------------|---------------------------------------------------|---------------------|----------------------|
+| `Deque()`           | Creates an empty deque                            | $O(1)$              | $O(1)$               |
+| `add_front(item)`   | Adds an item to the front of the deque             | $O(1)$              | $O(1)$               |
+| `add_rear(item)`    | Adds an item to the rear of the deque              | $O(1)$              | $O(1)$               |
+| `remove_front()`    | Removes and returns the front item of the deque    | $O(1)$              | $O(1)$               |
+| `remove_rear()`     | Removes and returns the rear item of the deque     | $O(1)$              | $O(1)$               |
+| `is_empty()`        | Checks if the deque is empty                       | $O(1)$              | $O(1)$               |
+| `size()`            | Returns the number of items in the deque           | $O(1)$              | $O(1)$               |
+
+---
+
+### Notes:
+- **Time complexity** for all deque operations is constant **$O(1)$**, as they involve adding or removing elements at the front or rear.
+- **Space complexity** for each operation is **$O(1)$**, not accounting for the storage required for the deque’s elements (which grows with the number of items).
+
+---
+
+## Implementing Deque
+
+You can find the implementation [here](./Deque/Deque.py). In this implementation, **list** is used as the internal data structure, with the **front** of the queue at the **0th index** and the **rear** at the end of the list. As a result, the **`add_front()`** and **`pop_front()`** operations have a time complexity of **$O(n)$** due to the need to shift all elements after removal.
+
+---
+
+## Deque Applications: Palindrome Checker
+
+A simple application would be is to check if a string is palidrome or not. [Here](./Deque/palindrom_checker.py) is the code implementation for it.
 
 ---
 
