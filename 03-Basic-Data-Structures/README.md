@@ -360,7 +360,7 @@ For an implementation of the **Hot Potato game**, refer to this [code](./Queue/h
 
 # Deque
 
-A deque (double-ended queue) is an ordered collection of items that allows adding and removing elements from both ends (front and rear). This flexibility makes it a hybrid structure combining the functionalities of stacks and queues, without enforcing LIFO or FIFO orderings. Proper and consistent use of addition and removal operations is required to maintain the desired behavior.
+A deque (**double-ended queue**), pronounced as "deck" is an ordered collection of items that allows adding and removing elements from both ends (front and rear). This flexibility makes it a hybrid structure combining the functionalities of stacks and queues, without enforcing LIFO or FIFO orderings. Proper and consistent use of addition and removal operations is required to maintain the desired behavior.
 
 ## Deque Abstract Data Type (ADT)
 
@@ -395,8 +395,148 @@ You can find the implementation [here](./Deque/Deque.py). In this implementation
 
 ## Deque Applications: Palindrome Checker
 
-A simple application would be is to check if a string is palidrome or not. [Here](./Deque/palindrom_checker.py) is the code implementation for it.
+A simple application would be is to check if a string is palidrome or not. [Here](./Deque/palindrome_checker.py) is the code implementation for it.
+
+Leveraging the deque’s ability to add and remove elements from both ends in $O(1)$ time, we can compare characters from the front and rear of the string sequentially. If all pairs match, the string is a palindrome; otherwise, it is not. The code for the implementation is [here](./Deque/palindrome_checker.py).
 
 ---
+
+
+# List
+
+A **list** is a collection of items where each item has a relative position within the sequence. This structure allows operations like accessing the first, second, or last items and maintaining a flexible size. Lists are often **unordered**. In Python, lists are powerful built-in data structures, but in other languages, they may need to be implemented manually.
+
+---
+
+## Unordered List Abstract Data Type (ADT)
+
+An **unordered list** is a collection where the relative position of items is maintained, but no specific order is enforced. The table below summarizes the core operations for an unordered list:
+
+**Implementation Assumption**: A **doubly linked list** is used. If an array-based list is used, complexities may vary.
+
+| **Method**      | **Description**                                           | **Time Complexity** | **Space Complexity** |
+|------------------|----------------------------------------------------------|---------------------|----------------------|
+| `List()`         | Creates a new empty list                                 | $O(1)$              | $O(1)$               |
+| `add(item)`      | Adds a new item to the list                              | $O(1)$              | $O(1)$               |
+| `remove(item)`   | Removes an item from the list                            | $O(n)$              | $O(1)$               |
+| `search(item)`   | Searches for an item in the list                         | $O(n)$              | $O(1)$               |
+| `is_empty()`     | Checks if the list is empty                              | $O(1)$              | $O(1)$               |
+| `size()`         | Returns the number of items in the list                  | $O(1)$              | $O(1)$               |
+| `append(item)`   | Adds a new item to the end of the list                   | $O(1)$              | $O(1)$               |
+| `index(item)`    | Returns the position of an item in the list              | $O(n)$              | $O(1)$               |
+| `insert(pos, item)` | Inserts an item at a specific position                | $O(n)$              | $O(1)$               |
+| `pop()`          | Removes and returns the last item in the list            | $O(1)$              | $O(1)$               |
+| `pop(pos)`       | Removes and returns an item at a specific position       | $O(n)$              | $O(1)$               |
+
+---
+
+### Notes:
+1. **Time Complexity**:
+   - Operations like `add`, `is_empty`, and `size` are $O(1)$.
+   - Operations involving traversal, such as `remove`, `search`, and `insert`, are $O(n)$.
+
+2. **Space Complexity**:
+   - Each operation requires $O(1)$ space, excluding the storage for the list elements.
+   - Doubly linked lists require extra memory for pointers (`next` and `prev`) compared to arrays.
+
+3. **Advantages**:
+   - **Dynamic Sizing**: No resizing overhead compared to arrays.
+   - **Flexible Insertions**: Items can be added or removed efficiently without shifting elements.
+
+---
+
+## Ordered List Abstract Data Type (ADT)
+
+An **ordered list** is a collection where each item is positioned based on a defined characteristic, such as ascending or descending order. 
+
+| **Method**      | **Description**                                         | **Time Complexity** | **Space Complexity** |
+|-----------------|--------------------------------------------------------|---------------------|----------------------|
+| `OrderedList()` | Creates a new empty ordered list                       | $O(1)$              | $O(1)$               |
+| `add(item)`     | Adds an item, maintaining order                        | $O(n)$              | $O(1)$               |
+| `remove(item)`  | Removes the specified item                             | $O(n)$              | $O(1)$               |
+| `search(item)`  | Searches for an item                                   | $O(n)$              | $O(1)$               |
+| `is_empty()`    | Checks if the list is empty                            | $O(1)$              | $O(1)$               |
+| `size()`        | Returns the number of items                            | $O(1)$              | $O(1)$               |
+| `index(item)`   | Returns the position of an item                        | $O(n)$              | $O(1)$               |
+| `pop()`         | Removes and returns the last item                      | $O(1)$              | $O(1)$               |
+| `pop(pos)`      | Removes and returns an item at a specific position     | $O(n)$              | $O(1)$               |
+
+---
+
+### Key Differences from Unordered List:
+- The `add(item)` method ensures the list remains sorted, making it more computationally expensive than in an unordered list.
+- Operations like `remove` and `pop(pos)` also respect the ordering of items.
+
+---
+
+## Inheritance Heirarchy
+
+
+```
+                   ┌─────────────┐
+                   │ LinkedList  │
+                   └─────────────┘
+                          ▲
+                          │
+             ┌────────────┴────────────┐
+             │                         │
+    ┌─────────────┐           ┌─────────────┐
+    │UnorderedList│           │ OrderedList │
+    └─────────────┘           └─────────────┘
+```
+
+1. **`LinkedList` (Base Class)**:
+   - Represents a generic doubly linked list.
+   - Provides core functionalities like `remove`, `search`, `is_empty`, `size`, `append`, `index`, `insert`, and `pop`.
+   - Serves as the foundation for specific types of linked lists.
+
+2. **`UnorderedList` (Derived Class)**:
+   - Inherits from `LinkedList`.
+   - Implements an **unordered linked list**, allowing elements to be added without any specific order.
+   - Adds operations like `add` (to insert an element at the beginning) and retains core `LinkedList` operations.
+
+3. **`OrderedList` (Derived Class)**:
+   - Inherits from `LinkedList`.
+   - Implements an **ordered linked list**, where elements are always inserted in a specific order (ascending or descending).
+   - Adds the `add` operation, which ensures elements are inserted in the correct position based on the ordering.
+
+This structure promotes **code reuse** by defining shared functionality in the base class (`LinkedList`) and extending or customizing behavior in the derived classes (`UnorderedList` and `OrderedList`).
+
+---
+
+## Implementing Doubly Linked List
+
+A **doubly linked list** is a sequence of nodes, each containing:
+1. **Data**: The value of the node.
+2. **Next**: A pointer to the next node.
+3. **Prev**: A pointer to the previous node.
+
+This bidirectional linking enables efficient traversal and manipulation.
+
+### Node Class:
+```python
+class Node:
+    def __init__(self, data, next=None, prev=None):
+        self.data = data  # The value of the node
+        self.next = next  # Pointer to the next node
+        self.prev = prev  # Pointer to the previous node
+```
+
+### Advantages:
+- **Bidirectional Traversal**: Navigate forward and backward efficiently.
+- **Efficient Deletion**: Remove a node without traversing to find its predecessor.
+- **Flexible Insertions**: Easily insert nodes before or after any given node.
+
+---
+
+### Code Implementation
+
+- [**Node Class**](./List/Node.py)  
+- [**Linked List**](./List/LinkedList.py)  
+- [**Unordered List**](./List/UnorderedList.py)  
+- [**Ordered List**](./List/OrderedList.py)  
+
+---
+
 
 # Take a look at [Exercises](./Exercises.md)
