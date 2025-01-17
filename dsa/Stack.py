@@ -1,14 +1,15 @@
 from typing import Any
+from UnorderedList import UnorderedList
 
 class Stack:
-    """Stack implementation as a list.
+    """Stack implementation as a Doubly Linked List.
     
     Operations: push, pop, peek, is_empty, size.
     """
     
     def __init__(self) -> None:
         """Create a new stack."""
-        self._items = []
+        self._items = UnorderedList()
         
     def is_empty(self) -> bool:
         """Check if the stack is empty."""
@@ -33,6 +34,7 @@ class Stack:
     def size(self) -> int:
         """Return the number of items in the stack."""
         return len(self._items)
+    
     
 # Create a stack instance
 stack = Stack()
@@ -74,3 +76,4 @@ try:
     assert False, "Peek on empty stack should raise IndexError."
 except IndexError:
     pass
+

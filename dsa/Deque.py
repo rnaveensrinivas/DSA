@@ -1,13 +1,14 @@
 from typing import Any
+from UnorderedList import UnorderedList
 
 class Deque: 
     def __init__(self) -> None: 
-        """Initalize Deque using list data structure.
+        """Initalize Deque using Doubly Linked List.
         Assuming front is at index 0 and rear at index -1. 
         
         Operations: add_front, add_rear, pop_front, pop_rear, is_empty, size
         """
-        self._items = []
+        self._items = UnorderedList()
         
     def is_empty(self) -> int: 
         """Check if the Deque is empty"""
@@ -32,7 +33,6 @@ class Deque:
     def size(self) -> None: 
         """Get the number of items in the deque"""
         return len(self._items)
-        
         
 # Create a deque instance
 deque = Deque()

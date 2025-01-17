@@ -1,41 +1,29 @@
 from typing import Any
+from Queue import Queue
 
-class Queue:
+class QueueWithRearAtStartOfList(Queue):
     """Queue implementation as a list.
-    Assuming front is at index 0 and rear is at index -1.
+    Assuming front is at index -1 and rear is at index 0.
     
     Operations: enqueue, dequeue, size, and is_empty.
     """
-
     def __init__(self) -> None:
         """Initialize the queue with an empty list and _counter variable with 0."""
-        self._items = []
-        
-    def is_empty(self) -> bool:
-        """Check if the queue is empty."""
-        return len(self._items) == 0
-    
+        super().__init__()
+
     def enqueue(self, item: Any) -> None:
         """Add the given item to the back of the queue."""
-        self._items.append(item)
-        # if rear at start of list
-        # self._items.insert(0, item)
+        self._items.insert(0, item)
         
     def dequeue(self) -> Any:
         """Remove and return the front element from the queue."""
         if self.is_empty():
             raise ValueError("Cannot dequeue from an empty queue.")
-        return self._items.pop(0)
-        # if front at end of list
-        # return self._items.pop()
+        return self._items.pop()
     
-    def size(self) -> int:
-        """Return the number of items in the queue."""
-        return len(self._items)
     
-
 # Create a queue instance
-queue = Queue()
+queue = QueueWithRearAtStartOfList()
 
 # Test is_empty on a new queue
 assert queue.is_empty() == True, "Queue should be empty initially."

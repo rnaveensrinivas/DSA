@@ -52,9 +52,9 @@ Binary: $(101101)_2$
 
 Binary: $(1100000)_2$
 
-
-
 </details>
+
+---
 
 ### 2. Convert the following infix expressions to prefix (use full parentheses):
 
@@ -82,6 +82,8 @@ Binary: $(1100000)_2$
 
 </details>
 
+---
+
 ### 3. Convert the above infix expressions to postfix (use full parentheses).
 
 <details>
@@ -105,6 +107,8 @@ Binary: $(1100000)_2$
     - $A B * C * D * E + F +$  
 
 </details>
+
+---
 
 ### 4. Convert the above infix expressions to postfix using the direct conversion algorithm. Show the stack as the conversion takes place.
 <details>
@@ -184,6 +188,8 @@ Binary: $(1100000)_2$
 
 </details>
 
+---
+
 ### 5. Evaluate the following postfix expressions. Show the stack as each operand and operator is processed.
 
 - 2 3 · 4 +
@@ -244,31 +250,87 @@ Binary: $(1100000)_2$
 ---
 </details>
 
-### 6. The alternative implementation of the queue ADT is to use a list such that the rear of the queue is at the end of the list. What would this mean for Big-O performance?
+---
+
+### 6. The alternative implementation of the queue ADT is to use a list such that the front of the queue is at the end of the list. What would this mean for Big-O performance?
+
+<details>
+<summary>Click to view answer</summary>
+
+If the front of the queue is at the end of the list:
+
+- **Enqueue** (`append` to the end): $O(n)$, since all elements must shift one position to the right.
+- **Dequeue** (`pop` from the front): $O(1)$, just remove from last position.
+
+</details>
+
+---
 
 ### 7. What is the result of carrying out both steps of the linked list add method in reverse order? What kind of reference results? What types of problems may result?
 
+---
+
 ### 8. Explain how the linked list remove method works when the item to be removed is in the last node.
 
+<details>
+<summary>Click to view answer</summary>
+
+```python
+self.tail = self.tail.prev
+if self.tail: 
+  self.tail.next = None
+```
+
+</details>
+
+---
+
 ### 9. Explain how the remove method works when the item is in the only node in the linked list.
+
+<details>
+<summary>Click to view answer</summary>
+
+```python
+self.head = self.tail = None
+```
+
+</details>
+
+---
 
 ### 10. Modify the infix-to-postfix algorithm so that it can handle errors.
 #### [Code](./Stack/infixToPostfix.py)
 
+---
+
 ### 11. Modify the postfix evaluation algorithm so that it can handle errors.
 #### [Code](./Stack/postfixEvaluation.py)
+
+---
 
 ### 12. Implement a direct infix evaluator that combines the functionality of infix-to-postfix conversion and the postfix evaluation algorithm. Your evaluator should process infix tokens from left to right and use two stacks, one for operators and one for operands, to perform the evaluation.
 #### [Code](./Stack/infixEvaluation.py)
 
+---
+
 ### 13. Turn your direct infix evaluator from the previous problem into a calculator.
 #### [Code](./Stack/calculator.py)
 
-### 14. Implement the queue ADT, using a list such that the rear of the queue is at the end of the list.
+---
+
+### 14. Implement the queue ADT, using a list such that the rear of the queue is at the start of the list.
+#### Check out the comments of enqueue and dequeue methods in [Code](./Queue/QueueWithRearAtStartOfList.py)
+
+---
 
 ### 15. Design and implement an experiment to do benchmark comparisons of the two queue implementations. What can you learn from such an experiment?
 
+---
+
 ### 16. Modify the hot potato simulation to allow for a randomly chosen counting value so that each pass is not predictable from the previous one.
+#### [Code](./Queue/calculator.py)
+
+---
 
 ### 17. Consider a real life situation. Formulate a question and then design a simulation that can help to answer it. Possible situations include:
 
@@ -279,10 +341,13 @@ Binary: $(1100000)_2$
 
 Be sure to state any assumptions that you make and provide any probabilistic data that must be considered as part of the scenario.
 
+---
+
 ### 18. Implement a radix sorting machine. A radix sort for base 10 integers is a mechanical sorting technique that utilizes a collection of bins, one main bin and 10 digit bins. Each bin acts like a queue and maintains its values in the order that they arrive. The algorithm begins by placing each number in the main bin. Then it considers each value digit by digit. The first value is removed and placed in a digit bin corresponding to the digit being considered. For example, if the ones digit is being considered, 534 is placed in digit bin 4 and 667 is placed in digit bin 7. Once all the values are placed in the corresponding digit bins, the values are collected from bin 0 to bin 9 and placed back in the main bin. The process continues with the tens digit, the hundreds, and so on. After the last digit is processed, the main bin contains the values in order.
 
-### 19. Another example of the parentheses matching problem comes from Hypertext Markup Language (HTML). In HTML, tags exist in both opening and closing forms and must be balanced to properly describe a web document. This very simple HTML document is intended only to show the matching and nesting structure for tags in the language. Write a program that can check an HTML document for proper opening and closing tags.:
+---
 
+### 19. Another example of the parentheses matching problem comes from Hypertext Markup Language (HTML). In HTML, tags exist in both opening and closing forms and must be balanced to properly describe a web document. This very simple HTML document is intended only to show the matching and nesting structure for tags in the language. Write a program that can check an HTML document for proper opening and closing tags.:
 ```html
 <html>
    <head>
@@ -296,39 +361,87 @@ Be sure to state any assumptions that you make and provide any probabilistic dat
    </body>
 </html>
 ```
-
 #### [Code](./Stack/html_tag_validator.py)
 
-### 20. Extend the program from Listing 3.15 to handle palindromes with spaces. For example, I PREFER PI is a palindrome that reads the same forward and backward if you ignore the blank characters.
+---
+
+### 20. Extend the program in [Deque Applications: Palindrome Checker](./README.md#deque-applications-palindrome-checker) to handle palindromes with spaces. For example, "I PREFER PI" is a palindrome that reads the same forward and backward if you ignore the blank characters.
+#### [Code](./Deque/palindrome_checker.py)
+---
 
 ### 21. To implement the size method, we counted the number of nodes in the list. An alternative strategy would be to store the number of nodes in the list as an additional piece of data in the head of the list. Modify the UnorderedList class to include this information and rewrite the size method.
+#### [Code](./List/LinkedList.py)
+
+---
 
 ### 22. Implement the remove method so that it works correctly in the case where the item is not in the list.
+#### [Code](./List/LinkedList.py)
+
+---
 
 ### 23. Modify the list classes to allow duplicates. Which methods will be impacted by this change?
+#### [Code](./List/LinkedList.py)
+
+---
 
 ### 24. Implement the __str__ method in the UnorderedList class. What would be a good string representation for a list?
+#### [Code](./List/LinkedList.py)
 
-### 25. Implement the __str__ method so that lists are displayed the Python way (with square brackets).
+---
+
+### 25. Implement the __repr__ method so that lists are displayed the Python way (with square brackets).
+#### [Code](./List/LinkedList.py)
+
+---
 
 ### 26. Implement the remaining operations defined in the unordered list ADT (append, index, pop, insert).
+#### [Code](./List/UnorderedList.py)
+
+---
 
 ### 27. Implement a slice method for the UnorderedList class. It should take two parameters, start and stop, and return a copy of the list starting at the start position and going up to but not including the stop position.
 
+---
+
 ### 28. Implement the remaining operations defined in the ordered list ADT.
+#### [Code](./List/OrderedList.py)
+
+---
 
 ### 29. Consider the relationship between unordered and ordered lists. Is it possible that inheritance could be used to build a more efficient implementation? Implement this inheritance hierarchy.
+#### Check out the section [Inheritance Heirarchy](./README.md#inheritance-heirarchy)
+
+---
 
 ### 30. Implement a stack using linked lists.
+#### [Code](../dsa/Stack.py); A one line change!
+
+---
 
 ### 31. Implement a queue using linked lists.
+#### [Code](../dsa/Queue.py); A one line change!
+
+---
 
 ### 32. Implement a deque using linked lists.
+#### [Code](../dsa/Deque.py); A one line change!
+
+---
 
 ### 33. Design and implement an experiment that will compare the performance of a Python list with a list implemented as a linked list.
 
+---
+
 ### 34. Design and implement an experiment that will compare the performance of the Python list-based stack and queue with the linked list implementation.
 
-### 35. The linked list implementation given above is called a singly linked list because each node has a single reference to the next node in the sequence. An alternative implementation is known as a doubly linked list. In this implementation, each node has a reference to the next node (commonly called next) as well as a reference to the preceding node (commonly called back). The head reference also contains two references, one to the first node in the linked list and one to the last. Code this implementation in Python.
+---
 
-### 36. Create an implementation of a queue that would have an average performance of  for enqueue and dequeue operations.
+### 35. The linked list implementation given above is called a singly linked list because each node has a single reference to the next node in the sequence. An alternative implementation is known as a doubly linked list. In this implementation, each node has a reference to the next node (commonly called next) as well as a reference to the preceding node (commonly called back). The head reference also contains two references, one to the first node in the linked list and one to the last. Code this implementation in Python.
+#### [Code](./List/LinkedList.py)
+
+---
+
+### 36. Create an implementation of a queue that would have an average performance of $O(1)$ for enqueue and dequeue operations.
+#### [Code](../dsa/Queue.py) A one line change!
+
+---
