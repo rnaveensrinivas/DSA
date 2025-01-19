@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any, List, Union
 from Node import Node
 
 class LinkedList:
@@ -187,27 +187,98 @@ class LinkedList:
         nodes = self._get_list_items()
         return self._stringify(nodes, start="[", end="]", separator=", ")
     
-    def __getitem__(self, index: int) -> Any:
-        """Retrieve an item by its index in the linked list."""
-        
-        # Check if index is valid (within the range)
-        if not (0 <= index < self.size() or -self.size() <= index < 0):
-            raise IndexError(f"{index} is out of range.")
-        
-        if index == -1: 
-            return self.tail.data
-        
-        if index == 0: 
-            return self.head.data
-        
-        if index < 0:
-            index = self.size() + index
+    def __getitem__(self, index: Union[int, slice] = 0) -> Union[Any, List[Any]]:
+        """
+        Retrieve an item by its index in the linked list.
 
-        position = 0
-        current = self.head
+        This method supports both direct indexing and slicing, allowing access
+        to elements by index or a range of elements.
+
+        Args:
+            index (Union[int, slice]): The index of the item to retrieve, or a slice 
+                                        object for a range of items.
+                                        - If an integer is provided, it retrieves the 
+                                        element at that index.
+                                        - If a slice object is provided, it returns a 
+                                        list of elements from the start to the stop index 
+                                        (inclusive of start, exclusive of stop).
+
+        Returns:
+            Union[Any, List[Any]]:
+                - If an integer index is provided, returns the element at that index.
+                - If a slice object is provided, returns a list of elements from the 
+                linked list within the specified range.
+
+        Raises:
+            IndexError: If the index is out of range.
         
-        while current and position != index: 
-            current = current.next
-            position += 1
+        Example:
+            >>> ll = LinkedList()
+            >>> for i in range(1, 11):
+            >>>     ll.append(i)
+            >>> ll[2]
+            3
+            >>> ll[2:5]
+            [3, 4, 5]
+        """
+        if isinstance(index, int): 
+            # Check if index is valid (within the range)
+            if not (0 <= index < self.size() or -self.size() <= index < 0):
+                raise IndexError(f"{index} is out of range.")
             
-        return current.data
+            if index == -1: 
+                return self.tail.data
+            
+            if index == 0: 
+                return self.head.data
+            
+            if index < 0:
+                index = self.size() + index
+
+            position = 0
+            current = self.head
+            
+            while current and position != index: 
+                current = current.next
+                position += 1
+                
+            return current.data
+        else: # Handle slicing
+            
+            if index.step: 
+                raise NotImplementedError
+             
+            start = index.start
+            stop = index.stop
+            
+            # Edge case
+            if start > 0 and stop > 0 and start > stop: 
+                return []
+                        
+            if start < 0:
+                start = self.size() + start
+            
+            if stop < 0: 
+                stop = self.size() + stop
+                
+            starting_index = min(start, stop)
+            ending_index = max(start, stop)
+            
+            position = 0
+            current = self.head
+            items = []
+            
+            while current and position < starting_index: 
+                current = current.next
+                position += 1
+                
+            if not current or not current.next: 
+                return items
+            
+            while current and position <= ending_index: 
+                items.append(current.data)
+                current = current.next
+                position += 1
+                
+            return items[:-1] if start < stop else items[::-1]
+            # ll[-2:-5] == [9, 8, 7, 6] "<=" in while and [-1] - corner case

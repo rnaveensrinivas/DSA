@@ -72,3 +72,44 @@ class UnorderedList(LinkedList):
             current.prev = new_node
 
         self.count += 1  # Increment the size of the list
+
+# Create the LinkedList object
+ll = UnorderedList()
+
+# Add elements to the linked list
+for i in range(1, 11):
+    ll.append(i)
+
+# Test single index access
+assert ll[0] == 1, "Test failed: Expected 1 at index 0"
+assert ll[5] == 6, "Test failed: Expected 6 at index 5"
+assert ll[-1] == 10, "Test failed: Expected 10 at index -1"
+assert ll[-2] == 9, "Test failed: Expected 9 at index -2"
+
+# Test out-of-range indices
+try:
+    ll[11]
+except IndexError:
+    pass  # Expected to raise IndexError
+
+try:
+    ll[-11]
+except IndexError:
+    pass  # Expected to raise IndexError
+
+# Test slicing (start:stop)
+assert ll[2:5] == [3, 4, 5], "Test failed: Expected [3, 4, 5] for slice 2:5"
+assert ll[0:3] == [1, 2, 3], "Test failed: Expected [1, 2, 3] for slice 0:3"
+
+# Test slicing with reverse order (start > stop)
+# assert ll[5:2] == [6, 5, 4], "Test failed: Expected [6, 5, 4] for slice 5:2"
+
+# Test slicing with negative indices
+assert ll[-5:-2] == [6, 7, 8], "Test failed: Expected [6, 7, 8] for slice -5:-2"
+
+# The below is a very important corner case.
+assert ll[-2:-5] == [9, 8, 7, 6], "Test failed: Expected [9, 8, 7, 6] for slice -2:-5"
+
+# Test empty list
+empty_ll = LinkedList()
+assert empty_ll[0:2] == [], "Test failed: Expected empty list for slice 0:2 on empty list"

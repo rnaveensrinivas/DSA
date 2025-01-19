@@ -199,7 +199,7 @@ Binary: $(1100000)_2$
 <details>
 <summary>Click to view answer</summary>
 
-### 1. Expression: **2 3 · 4 +**
+#### 1. Expression: **2 3 · 4 +**
 
 | Step | Action              | Stack  |
 |------|---------------------|--------|
@@ -213,7 +213,7 @@ Binary: $(1100000)_2$
 
 ---
 
-### 2. Expression: **1 2 + 3 + 4 + 5 +**
+#### 2. Expression: **1 2 + 3 + 4 + 5 +**
 
 | Step | Action               | Stack   |
 |------|----------------------|---------|
@@ -231,7 +231,7 @@ Binary: $(1100000)_2$
 
 ---
 
-### 3. Expression: **1 2 3 4 5 · + · +**
+#### 3. Expression: **1 2 3 4 5 · + · +**
 
 | Step | Action                 | Stack           |
 |------|------------------------|-----------------|
@@ -267,6 +267,27 @@ If the front of the queue is at the end of the list:
 ---
 
 ### 7. What is the result of carrying out both steps of the linked list add method in reverse order? What kind of reference results? What types of problems may result?
+```python
+def add(self, item):
+    temp = Node(item)
+    
+    # the steps
+    temp.set_next(self.head)
+    self.head = temp
+```
+
+<details>
+<summary>Click to view answer</summary>
+
+If the lines were reversed, we would **lose** the list that was being referenced by `self.head`. The first line (`self.head = temp`) sets the head to the new node, but the second line (`temp.set_next(self.head)`) causes the new node to point to itself, as `self.head` now refers to the same node (`temp`). 
+
+#### What kind of reference results?
+The resulting reference is a **self-referential node**. The new node points to itself, creating a circular link.
+
+#### What types of problems may result?
+This creates a **circular linked list** with a single node. Traversing the list will result in an **infinite loop**, and future operations like adding or searching nodes may not work correctly due to the broken structure.
+
+</details>
 
 ---
 
@@ -281,9 +302,18 @@ if self.tail:
   self.tail.next = None
 ```
 
+In a doubly linked list, when the item to be removed is in the last node:
+
+1. **Update the tail reference:** The `self.tail` pointer is updated to point to the previous node (`self.tail.prev`). This effectively removes the last node from the list by disconnecting it from the tail reference.
+  
+2. **Disconnect the previous tail:** If the updated `self.tail` is not `None`, the `self.tail.next` pointer is set to `None`. This ensures that the new tail node becomes the last node in the list without a forward reference.
+
+If the list becomes empty (i.e., there was only one node), `self.tail` is set to `None`.
+
 </details>
 
 ---
+
 
 ### 9. Explain how the remove method works when the item is in the only node in the linked list.
 
@@ -293,6 +323,14 @@ if self.tail:
 ```python
 self.head = self.tail = None
 ```
+
+When the item to be removed is in the only node in the linked list:
+
+1. **Clear the head and tail pointers:** Both `self.head` and `self.tail` are set to `None`. This effectively removes the sole node from the list, leaving the list empty.
+   
+2. **Resulting empty list:** Since there are no more nodes, any subsequent operations on the list will treat it as empty.
+
+This ensures the linked list maintains consistency and avoids dangling references to the removed node.
 
 </details>
 
@@ -324,7 +362,7 @@ self.head = self.tail = None
 ---
 
 ### 15. Design and implement an experiment to do benchmark comparisons of the two queue implementations. What can you learn from such an experiment?
-
+#### Can be skipped
 ---
 
 ### 16. Modify the hot potato simulation to allow for a randomly chosen counting value so that each pass is not predictable from the previous one.
@@ -340,11 +378,11 @@ self.head = self.tail = None
 - A bank teller
 
 Be sure to state any assumptions that you make and provide any probabilistic data that must be considered as part of the scenario.
-
+#### Skipping all simulation questions.
 ---
 
 ### 18. Implement a radix sorting machine. A radix sort for base 10 integers is a mechanical sorting technique that utilizes a collection of bins, one main bin and 10 digit bins. Each bin acts like a queue and maintains its values in the order that they arrive. The algorithm begins by placing each number in the main bin. Then it considers each value digit by digit. The first value is removed and placed in a digit bin corresponding to the digit being considered. For example, if the ones digit is being considered, 534 is placed in digit bin 4 and 667 is placed in digit bin 7. Once all the values are placed in the corresponding digit bins, the values are collected from bin 0 to bin 9 and placed back in the main bin. The process continues with the tens digit, the hundreds, and so on. After the last digit is processed, the main bin contains the values in order.
-
+#### Will come back after finishing the book
 ---
 
 ### 19. Another example of the parentheses matching problem comes from Hypertext Markup Language (HTML). In HTML, tags exist in both opening and closing forms and must be balanced to properly describe a web document. This very simple HTML document is intended only to show the matching and nesting structure for tags in the language. Write a program that can check an HTML document for proper opening and closing tags.:
@@ -400,6 +438,7 @@ Be sure to state any assumptions that you make and provide any probabilistic dat
 ---
 
 ### 27. Implement a slice method for the UnorderedList class. It should take two parameters, start and stop, and return a copy of the list starting at the start position and going up to but not including the stop position.
+#### [Code](./List/LinkedList.py)
 
 ---
 
@@ -429,11 +468,11 @@ Be sure to state any assumptions that you make and provide any probabilistic dat
 ---
 
 ### 33. Design and implement an experiment that will compare the performance of a Python list with a list implemented as a linked list.
-
+#### Can be skipped
 ---
 
 ### 34. Design and implement an experiment that will compare the performance of the Python list-based stack and queue with the linked list implementation.
-
+#### Can be skipped
 ---
 
 ### 35. The linked list implementation given above is called a singly linked list because each node has a single reference to the next node in the sequence. An alternative implementation is known as a doubly linked list. In this implementation, each node has a reference to the next node (commonly called next) as well as a reference to the preceding node (commonly called back). The head reference also contains two references, one to the first node in the linked list and one to the last. Code this implementation in Python.
