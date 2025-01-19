@@ -353,7 +353,7 @@ Move disk 1 from Pole B to Pole C
 
 Many computer science problems involve optimizing values, such as finding the shortest path or minimizing the number of objects that satisfy certain criteria. One such optimization technique is **dynamic programming**. A classic example of an optimization problem is making change using the fewest coins. 
 
-In a simple case with U.S. coins, a greedy approach works well: start with the largest coin (a quarter) and use as many as possible before moving to smaller coins. For example, for 63 cents, the greedy method gives six coins (two quarters, one dime, and three pennies). However, when a 21-cent coin is added to the mix, the greedy method fails, as it would still use six coins. The optimal solution, in this case, is three 21-cent coins. This shows that while the greedy approach can work in many situations, it doesn't always yield the best solution.
+In a simple case with U.S. coins, a **greedy** approach works well: start with the largest coin (a quarter) and use as many as possible before moving to smaller coins. For example, for 63 cents, the greedy method gives six coins (two quarters, one dime, and three pennies). However, when a 21-cent coin is added to the mix, the greedy method fails, as it would still use six coins. The optimal solution, in this case, is three 21-cent coins. This shows that while the greedy approach can work in many situations, it doesn't always yield the best solution.
 
 To ensure an optimal solution to the change-making problem, we can use recursion. The base case is when the amount to be changed exactly matches the value of a coin—this requires just one coin. For other amounts, we consider multiple options: we can subtract the value of a coin (such as a penny, nickel, or dime) and recursively determine the minimum number of coins needed for the remaining amount. 
 
@@ -397,7 +397,7 @@ This results in a **time complexity of O(c^n)**, where:
 - `c` is the number of coin types.
 - `n` is the target `change`.
 
-### Solution: 
+### Solution: Memoziation
 
 The key to reducing the workload in recursive solutions lies in **storing past results** to avoid redundant computations. This approach, known as **memoization** (also called **caching**), involves maintaining a table to store results of previously solved subproblems. Here's how it works:
 
@@ -413,3 +413,14 @@ Take a look at method `num_coins_memo` in [code](./coinChange.py) on solving thi
 
 ---
 
+### Solution: Iteration plus Table, the actual dynamic programming
+
+The current algorithm uses memoization (caching) to optimize performance, but it is not a true dynamic programming solution. Dynamic programming systematically builds the solution from the smallest subproblems, starting with one cent and iteratively solving up to the required amount. This ensures all smaller subproblems are already solved at each step, leading to a more structured and efficient approach.
+
+The dynamic programming approach calculates the minimum number of coins needed for each amount of change incrementally, starting from one cent up to the target amount. For each intermediate value, it considers all available coin denominations that can contribute to that amount and determines the minimum coins required by comparing previously computed results. A table is maintained to store the minimum coins needed for every amount, ensuring that when calculating for a higher value, the results for smaller amounts are already available. This systematic process eliminates redundant computations and guarantees an optimal solution. Check out the function `num_coins_dp` in code [here](./coinChange.py).
+
+### Returning the exact change instead of just number of minimum coins
+
+The current making change algorithm determines the minimum number of coins but does not track which coins are used. This can be addressed by modifying the algorithm to record the last coin added for each amount in the results table. By tracing back through this record, starting from the target amount and subtracting the value of each coin, we can determine all the coins used. The extended algorithm uses two lists: one to track the coins used and another to store the minimum number of coins required for each amount. The solution is then derived by walking backward through the `coins_used` list, providing a clear view of the coins used to make change. Check out the function `get_coins_dp` in code [here](./coinChange.py).
+
+# Checkout the [Exercises](./Exercises.md)

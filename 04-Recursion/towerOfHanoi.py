@@ -7,6 +7,7 @@ def solve_toi(disks: List[int],
                    ) -> None: 
     """Recursively solve Tower of Hanoi problem."""
     
+    # print(f"solve_toi({disks=},\t\t{from_pole=},\t{to_pole=},\t{intermediary_pole=})")
     if len(disks) == 1: 
         print(f"Move disk {disks[0]} from {from_pole} to {to_pole}")
         return
@@ -24,7 +25,7 @@ def solve_toi(disks: List[int],
 if __name__ == "__main__": 
     
     for i in range(1,5): 
-        print(f"Solving Tower of Hanoi Problem for {i} disks:")
+        # print(f"Solving Tower of Hanoi Problem for {i} disks:")
         disks = list(range(1,i+1))
         solve_toi(disks)
         print()
