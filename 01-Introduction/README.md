@@ -54,3 +54,12 @@ Key points:
 Ultimately, studying algorithms equips us to identify efficient solutions, analyze their effectiveness, and adapt to increasingly complex problems.
 
 ---
+
+# Checkout the [Exercises](./Exercises.md)
+
+
+# To do: 
+* Refactor LogicGate.py (low priority)
+* Complete Sudoku Solver after **completing book**.
+  
+---

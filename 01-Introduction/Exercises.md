@@ -235,6 +235,7 @@ DesktopComputer       MainframeComputer
 ---
 
 ### 4. Using the classes provided in the chapter, interactively construct a circuit and test it.
+#### [Code](./LogicGate.py)
 
 ---
 
@@ -280,19 +281,21 @@ DesktopComputer       MainframeComputer
 ---
 
 ### 15. The most simple arithmetic circuit is known as the half adder. Research the simple half-adder circuit. Implement this circuit.
-
+#### [Code](./halfAdder.py)
 ---
 
 ### 16. Now extend that circuit and implement an 8-bit full adder.
+#### [Code](./eightBitFullAdder.py)
+
 
 ---
 
 ### 17. The circuit simulation shown in this chapter works in a backward direction. In other words, given a circuit, the output is produced by working back through the input values, which in turn cause other outputs to be queried. This continues until external input lines are found, at which point the user is asked for values. Modify the implementation so that the action is in the forward direction; upon receiving inputs the circuit produces an output.
-
+#### Low priority, hence skipped.
 ---
 
 ### 18. Design a class to represent a playing card and another one to represent a deck of cards. Using these two classes, implement your favorite card game.
-
+#### [Code](./cardGame.py)
 ---
 
 ### 19. Find a Sudoku puzzle online or in the local newspaper. Write a program to solve the puzzle.
