@@ -374,3 +374,71 @@ Check out the implementation of bubble sort [here](./bubbleSort.py).
 6. **Inefficient for Large Data**: Performs poorly on large datasets due to quadratic time complexity.
 7. **Optimizable**: Variants like optimized bubble sort can terminate early if no swaps are needed in a pass.
 8. **Partial Stop**: If the algorithm stops after the x-th pass, the largest x elements will be correctly sorted at the end of the list, providing partial sorting that can be useful in certain contexts.
+
+## Selection Sort
+
+Selection sort is a simple sorting algorithm that improves upon bubble sort by reducing the number of exchanges. It works by selecting the largest (or smallest) element during each pass and placing it in its correct position.
+
+### Key Points:
+1. **Process**:  
+   - In each pass, the algorithm scans the list, finds the largest remaining item, and moves it to its correct position at the end.  
+   - After the first pass, the largest item is in its final place. After the second pass, the next largest is placed, and so on.  
+   - This process continues for $n-1$ passes for a list of $n$ items.  
+
+2. **Efficiency**:  
+   - **Comparisons**: Selection sort makes $O(n^2)$ comparisons, the same as bubble sort.  
+   - **Exchanges**: Fewer exchanges are made compared to bubble sort, improving execution time.  
+
+3. **Advantages**:  
+   - Simpler and generally faster than bubble sort due to fewer swaps.  
+   - Works well for small lists or when memory usage is a concern.  
+
+4. **Limitations**:  
+   - Still $O(n^2)$, making it inefficient for large lists compared to more advanced algorithms like quicksort or mergesort.  
+
+By reducing unnecessary exchanges, selection sort typically performs better in practice than bubble sort, even though both have the same time complexity.
+
+[Here](./selectionSort.py) is the implementation for selection sort. 
+
+## Insertion Sort
+
+### Insertion Sort: Summary
+
+The **insertion sort** algorithm works differently from other $O(n^2)$ algorithms like bubble sort and selection sort. It maintains a **sorted sublist** in the lower part of the list, and for each new item, it finds the correct position in the sorted sublist and inserts it.
+
+#### Key Features:
+1. **Sorted Sublist**: The algorithm maintains a sublist of sorted elements, starting with the first element.
+2. **Insertion Process**: 
+   - The algorithm iterates through the list, one item at a time, and inserts each item into its correct position in the sorted sublist.
+   - During this process, all elements larger than the current item are shifted to the right, making space for the new item.
+3. **Best Case**: In the best case, when the list is already sorted, only one comparison is needed per pass, resulting in a time complexity of $O(n)$.
+4. **Worst Case**: In the worst case, where the list is in reverse order, the algorithm will perform $O(n^2)$ comparisons and shifts, as every item must be compared with all the others in the sorted sublist.
+
+#### Time Complexity:
+- **Worst Case**: $O(n^2)$ (when the list is in reverse order).
+- **Best Case**: $O(n)$ (when the list is already sorted).
+- **Average Case**: $O(n^2)$.
+
+#### Comparison vs. Exchange:
+- **Shifting**: Insertion sort primarily uses shifts, which are cheaper than exchanges since only one assignment is done during a shift (unlike an exchange that requires two assignments).
+- **Performance**: Although $O(n^2)$, insertion sort can show good performance, especially when the list is almost sorted, since it performs fewer shifts compared to swaps in other algorithms.
+
+### Process Visualization
+1. Assume a list with just one item is sorted.
+2. For each item from index $1$ to $n-1$, compare it with the sorted sublist (from index $0$ to $i-1$).
+3. Shift elements that are larger to the right until the correct position for the current item is found.
+4. Insert the item at the correct position.
+
+#### Example:
+For a list \([5, 2, 9, 1, 5, 6]\):
+- **First Pass**: 2 is inserted in the sorted sublist \([5]\), resulting in \([2, 5, 9, 1, 5, 6]\).
+- **Second Pass**: 9 is already in the correct position.
+- **Third Pass**: 1 is inserted in the sorted sublist, shifting 5 and 9 to the right.
+- **And so on**.
+
+This process continues until the entire list is sorted.
+
+### Benchmark:
+In benchmark studies, insertion sort often performs well on nearly sorted lists due to its efficient shifting operation.
+
+[Here](./insertionSort.py) is the implementation for insertion sort. 
