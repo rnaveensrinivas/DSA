@@ -343,6 +343,8 @@ When analyzing sorting algorithms, two primary operations are measured:
 
 These operations help evaluate the efficiency of sorting algorithms.
 
+---
+
 ## Bubble Sort
 
 Bubble sort is a simple sorting algorithm that repeatedly traverses a list, comparing adjacent items, and swapping them if they are in the wrong order. Each pass ensures that the largest unsorted element "bubbles" up to its correct position.
@@ -375,6 +377,8 @@ Check out the implementation of bubble sort [here](./bubbleSort.py).
 7. **Optimizable**: Variants like optimized bubble sort can terminate early if no swaps are needed in a pass.
 8. **Partial Stop**: If the algorithm stops after the x-th pass, the largest x elements will be correctly sorted at the end of the list, providing partial sorting that can be useful in certain contexts.
 
+---
+
 ## Selection Sort
 
 Selection sort is a simple sorting algorithm that improves upon bubble sort by reducing the number of exchanges. It works by selecting the largest (or smallest) element during each pass and placing it in its correct position.
@@ -400,9 +404,9 @@ By reducing unnecessary exchanges, selection sort typically performs better in p
 
 [Here](./selectionSort.py) is the implementation for selection sort. 
 
-## Insertion Sort
+---
 
-### Insertion Sort: Summary
+## Insertion Sort
 
 The **insertion sort** algorithm works differently from other $O(n^2)$ algorithms like bubble sort and selection sort. It maintains a **sorted sublist** in the lower part of the list, and for each new item, it finds the correct position in the sorted sublist and inserts it.
 
@@ -442,3 +446,88 @@ This process continues until the entire list is sorted.
 In benchmark studies, insertion sort often performs well on nearly sorted lists due to its efficient shifting operation.
 
 [Here](./insertionSort.py) is the implementation for insertion sort. 
+
+---
+
+## Shell Sort
+
+**Shell sort**, also known as **diminishing increment sort**, is an enhancement of **insertion sort**. Instead of sorting the entire list at once, it divides the list into smaller **sublists** based on a **gap** (or **increment**) and sorts each sublist using **insertion sort**. The key innovation lies in how these sublists are created: items that are a fixed gap apart are grouped together.
+
+As the sort progresses, the **gap** is reduced, eventually reaching **one**. At this stage, a final **insertion sort** is performed on the nearly sorted list, which requires significantly fewer **comparisons** and **shifts** due to the prior sorting steps. Each pass ensures the list becomes progressively **more sorted**, making the final step highly efficient.
+
+The choice of **gaps** plays a crucial role in the performance of Shell sort. A common strategy is to start with a gap of **$n/2$**, followed by **$n/4$**, and so on, halving each time. Other gap sequences, like **$2^k - 1$** (1, 3, 7, 15, etc.), can improve performance, achieving a complexity closer to **$O(n^{3/2})$**. Overall, Shell sort operates between **$O(n)$** and **$O(n^2)$**, depending on the gap sequence.
+
+Check out [this](https://www.youtube.com/watch?v=qzXAVXddcPU&ab_channel=RunTimeClips) demonstration video for better understanding.
+
+Check out the code to shell sort [here](./shellSort.py). 
+
+---
+
+## Merge Sort
+
+Merge Sort is a **divide-and-conquer** sorting algorithm that recursively splits a list into smaller sublists, sorts them, and then merges the sorted sublists back together to form the final sorted list.
+
+---
+
+### Key Steps of Merge Sort:
+1. **Base Case:**  
+   If the list has one item or is empty, it is considered sorted, and no further action is needed.
+
+2. **Divide:**  
+   If the list has more than one element:
+   - Split it into two halves using slicing.
+   - Recursively apply `merge_sort` on each half.
+
+3. **Merge:**  
+   Combine the two sorted halves into a single sorted list. This is achieved by comparing the smallest elements of each half and placing the smaller element into the new list, ensuring the algorithm is **stable** (maintains the order of duplicate elements).
+
+---
+
+### Algorithm Analysis:
+1. **Splitting Phase:**  
+   Each split reduces the list size by half. A list of size $n$ can be split $\log n$ times.
+
+2. **Merging Phase:**  
+   Merging two halves involves processing all $n$ elements.
+
+3. **Total Time Complexity:**  
+   Since there are $\log n$ splits and each split requires $O(n)$ operations for merging, the overall complexity is $O(n \log n)$.
+
+4. **Space Complexity:**  
+   The algorithm requires **extra space** to hold the temporary sublists created during the splitting and merging phases. This can be significant for large lists.
+
+---
+
+### Code Implementation:
+[Here](./mergeSort.py) is the Python implementation of Merge Sort.
+
+### Advantages:
+1. **Stable Sort:** Maintains the relative order of duplicate elements.
+2. **Efficient for Large Datasets:** Time complexity of $O(n \log n)$ makes it faster than simpler algorithms like bubble sort or insertion sort for larger lists.
+
+---
+
+### Disadvantages:
+1. **Space Complexity:** Requires additional memory to hold temporary sublists, which can be problematic for very large datasets.
+2. **Slicing Cost:** In the implementation above, slicing adds overhead, as it is $O(k)$ for a slice of size $k$. This can be avoided by passing indices instead of creating new lists.
+
+---
+
+## Quick Sort
+
+Quicksort is a **divide-and-conquer** sorting algorithm similar to merge sort but avoids additional storage. It selects a **pivot value** (commonly the first item) to partition the list. The goal is to place the pivot in its correct position (the **split point**) while ensuring all items to the left are smaller and all items to the right are larger.
+
+The **partitioning** process uses two markers: `left_mark` starts at the left end, moving right until a value greater than the pivot is found, and `right_mark` starts at the right end, moving left until a value smaller than the pivot is found. These out-of-place items are then swapped. This continues until `right_mark < left_mark`, at which point the pivot is placed at the split point, and the list is recursively sorted on either side.
+
+**Performance**:
+- **Best/Average Case**: When the pivot divides the list evenly, resulting in \(O(n \log n)\).
+- **Worst Case**: When the pivot creates unbalanced splits (e.g., sorted or reverse-sorted input), leading to \(O(n^2)\).
+
+**Optimizations**: 
+- Using the **median-of-three** method to select the pivot (median of the first, middle, and last elements) reduces the likelihood of unbalanced splits, improving performance, especially for semi-sorted lists.
+
+Checkout the implementation [here](./quickSort.py). 
+
+---
+
+# Check out the [Exercise](./Exercises.md)
