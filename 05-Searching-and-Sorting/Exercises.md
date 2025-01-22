@@ -68,15 +68,15 @@ At what point do you think the hash table is too small? Explain.
 ---
 
 ### Set up a random experiment to test the difference between a sequential search and a binary search on a list of integers.
-
+#### [Code](./timeitBinaryAndSequentialComparison.py)
 ---
 
 ### Use the binary search functions given in the text (recursive and iterative). Generate a random, ordered list of integers and do a benchmark analysis for each one. What are your results? Can you explain them?
-
+#### [Code](./timeitBinarySearchIterativeAndRecursiveComparison.py)
 ---
 
 ### Implement the binary search using recursion without the slice operator. Recall that you will need to pass the list along with the starting and ending index values for the sublist. Generate a random, ordered list of integers and do a benchmark analysis.
-
+#### Check out the function `binary_search_recursive` in [this](./binarySearch.py) code.
 ---
 
 ### Implement the len method (__len__) for the hash table Map ADT implementation.

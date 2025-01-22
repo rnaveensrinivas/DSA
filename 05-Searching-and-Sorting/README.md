@@ -1,6 +1,6 @@
 # Searching
 
-Searching is the algorithmic process of finding a specific item in a collection. The result of a search is typically **True** or **False**, indicating whether the item is present. Occasionally, searches can return the item's location. In this context, the focus is on determining membership.
+Searching is the algorithmic process of finding a specific item in a collection. The result of a search is typically **True** or **False**, indicating whether the item is present (**membership**). Occasionally, searches can return the item's location. 
 
 In Python, the **`in`** operator provides a simple way to check if an item exists in a list:
 
@@ -13,12 +13,11 @@ Although the syntax is straightforward, underlying algorithms perform the actual
 
 ## The Sequential Search
 
-In collections like lists, data items have a linear or sequential relationship, with each item's position determined by its index. A **sequential search** involves starting at the first item and moving through the list in order until either:
+In collections like lists, data items have a **linear** or **sequential** relationship, with each item's position determined by its index. A **sequential search** involves starting at the first item and moving through the list **in order**, following the underlying sequential order until either:
 
 1. The desired item is found.
 2. The search reaches the end of the list without finding the item.
 
-This approach relies on the ordered nature of index values in a list.
 
 An example: 
 ```plaintext
@@ -34,7 +33,6 @@ Checkout the implementation [here](./sequentialSearch.py).
 
 To analyze searching algorithms, the **number of comparisons** is used as the basic unit of computation. In sequential search, if the list is unordered and the item is not present, every element must be compared, requiring $n$ comparisons. When the item is present, the **best case** occurs if it is found in the first position, requiring just 1 comparison. The **worst case** happens if the item is found in the last position, requiring $n$ comparisons. On average, the item is found approximately halfway through the list, requiring $n/2$ comparisons. As $n$ becomes large, constants become negligible, making the time complexity $O(n)$.
 
-
 **Table: Comparisons in Sequential Search of an Unordered List**
 
 | **Case**              | **Item is Present**       | **Item is Not Present**   |
@@ -44,7 +42,6 @@ To analyze searching algorithms, the **number of comparisons** is used as the ba
 | **Average Case**      | $n/2$ comparisons    | $n$ comparisons      |
 
 When searching an ordered list, the best-case scenario occurs if the item is found in the first position or if the first out-of-order item indicates the item is not present, requiring only 1 comparison. The **worst case** is similar to an unordered list, where $n$ comparisons are needed if the item is found at the end or confirmed absent after examining all elements. On average, when the item is present, it is found about halfway through the list, requiring $n/2$ comparisons. If the item is not present, fewer comparisons are needed compared to an unordered list since the search terminates early when encountering an out-of-range item. The time complexity remains $O(n)$, with minor improvements for absence cases.
-
 
 **Table: Comparisons in Sequential Search of an Ordered List**
 
