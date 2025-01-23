@@ -328,6 +328,8 @@ One of the key advantages of a dictionary is that it supports fast lookup. Given
 
 Checkout the code [here](./dictionary.py)
 
+---
+
 # Sorting
 
 Sorting is the process of arranging elements in a specific order, such as alphabetically, by size, or by other attributes. For example, a list of words can be sorted alphabetically, and a list of cities can be sorted by population or area. Sorting is important because it optimizes many algorithms, like binary search, and allows for easier data manipulation.
@@ -344,7 +346,7 @@ These operations help evaluate the efficiency of sorting algorithms.
 
 ## Bubble Sort
 
-Bubble sort is a simple sorting algorithm that repeatedly traverses a list, comparing adjacent items, and swapping them if they are in the wrong order. Each pass ensures that the largest unsorted element "bubbles" up to its correct position.
+Bubble sort is a simple sorting algorithm that repeatedly traverses a list, comparing adjacent items, and swapping them if they are in the wrong order. Each pass ensures that the **largest unsorted element** "bubbles" up to its correct position.
 
 ### Process:
 1. On the first pass, the algorithm compares and possibly swaps adjacent items. After the first pass, the largest item will be placed in its correct position at the end of the list.
@@ -352,10 +354,10 @@ Bubble sort is a simple sorting algorithm that repeatedly traverses a list, comp
 3. The process repeats for $n - 1$ passes (where $n$ is the total number of items). After $n - 1$ passes, the list will be completely sorted.
 
 ### Early Stopping
-A bubble sort is often considered the most inefficient sorting method since it must exchange items before the final location is known. These “wasted” exchange operations are very costly. However, because the bubble sort makes passes through the entire unsorted portion of the list, it has the capability to do something most sorting algorithms cannot. In particular, if during a pass there are no exchanges, then we know that the list must be sorted. A bubble sort can be modified to stop early if it finds that the list has become sorted. This means that for lists that require just a few passes, a bubble sort may have an advantage in that it will recognize the sorted list and stop.
+A bubble sort is often considered the most inefficient sorting method since it must exchange items before the final location is known. These “wasted” exchange operations are very costly. However, because the bubble sort makes passes through the entire unsorted portion of the list, it has the capability to do something most sorting algorithms cannot. In particular, if during a pass there are no exchanges, then we know that the list must be sorted. A bubble sort can be modified to stop early if it finds that the list has become sorted. This means that for lists that require just a few passes, a bubble sort may have an advantage in that it will recognize the sorted list and stop. Bulbble sort using early stopping is called **short bubble**.
 
 ### Efficiency:
-- **Best Case**: If the list is already sorted, bubble sort will still go through the entire list one time, making comparisons without needing any swaps. This results in a time complexity of $O(n)$ in the best case (with an optimized version of the algorithm that checks for swaps).
+- **Best Case**: If the list is already sorted, bubble sort will go through the entire list one time, making comparisons without needing any swaps. This results in a time complexity of $O(n)$ in the best case (with an optimized version of the algorithm that checks for swaps).
 - **Worst Case**: In the worst case, where the list is sorted in reverse order, bubble sort will perform $O(n^2)$ comparisons and swaps.
  
 ### Implementation
@@ -378,7 +380,9 @@ Check out the implementation of bubble sort [here](./bubbleSort.py).
 
 ## Selection Sort
 
-Selection sort is a simple sorting algorithm that improves upon bubble sort by reducing the number of exchanges. It works by selecting the largest (or smallest) element during each pass and placing it in its correct position.
+Selection sort is a straightforward and efficient sorting algorithm that minimizes the number of exchanges by limiting them to **one exchange per pass**. Unlike bubble sort, which swaps adjacent elements repeatedly to move the largest (or smallest) element to its correct position, selection sort identifies the largest (or smallest) element in the unsorted portion of the list during each pass and swaps it directly with the element at its correct position.
+
+In essence, while both selection sort and bubble sort involve comparing elements, selection sort stands out by focusing on finding the target element (largest or smallest) in a single pass and performing a single exchange, making it more efficient in terms of swaps.
 
 ### Key Points:
 1. **Process**:  
@@ -431,8 +435,8 @@ The **insertion sort** algorithm works differently from other $O(n^2)$ algorithm
 4. Insert the item at the correct position.
 
 #### Example:
-For a list \([5, 2, 9, 1, 5, 6]\):
-- **First Pass**: 2 is inserted in the sorted sublist \([5]\), resulting in \([2, 5, 9, 1, 5, 6]\).
+For a list $[5, 2, 9, 1, 5, 6]$:
+- **First Pass**: 2 is inserted in the sorted sublist $[5]$, resulting in $[2, 5, 9, 1, 5, 6]$.
 - **Second Pass**: 9 is already in the correct position.
 - **Third Pass**: 1 is inserted in the sorted sublist, shifting 5 and 9 to the right.
 - **And so on**.
@@ -448,11 +452,11 @@ In benchmark studies, insertion sort often performs well on nearly sorted lists 
 
 ## Shell Sort
 
-**Shell sort**, also known as **diminishing increment sort**, is an enhancement of **insertion sort**. Instead of sorting the entire list at once, it divides the list into smaller **sublists** based on a **gap** (or **increment**) and sorts each sublist using **insertion sort**. The key innovation lies in how these sublists are created: items that are a fixed gap apart are grouped together.
+**Shell sort**, also known as **diminishing increment sort**, is an enhancement of **insertion sort**, by reducing the number shifts. Instead of sorting the entire list at once, it divides the list into smaller **sublists** based on a **gap** (or **increment**) and sorts each sublist using **insertion sort**. The key innovation lies in how these sublists are created: items that are a fixed gap apart are grouped together.
 
 As the sort progresses, the **gap** is reduced, eventually reaching **one**. At this stage, a final **insertion sort** is performed on the nearly sorted list, which requires significantly fewer **comparisons** and **shifts** due to the prior sorting steps. Each pass ensures the list becomes progressively **more sorted**, making the final step highly efficient.
 
-The choice of **gaps** plays a crucial role in the performance of Shell sort. A common strategy is to start with a gap of **$n/2$**, followed by **$n/4$**, and so on, halving each time. Other gap sequences, like **$2^k - 1$** (1, 3, 7, 15, etc.), can improve performance, achieving a complexity closer to **$O(n^{3/2})$**. Overall, Shell sort operates between **$O(n)$** and **$O(n^2)$**, depending on the gap sequence.
+The choice of **gaps** plays a crucial role in the performance of Shell sort. A common strategy is to start with a gap of **$n/2$**, followed by **$n/4$**, and so on, halving each time. Other gap sequences, like **$2^k - 1$** (1, 3, 7, 15, etc.), can improve performance, achieving a complexity closer to **$O(n^{3/2})$**. Overall, Shell sort operates between **$O(n)$** and **$O(n^2)$**, depending on the gap sequence. Shell sort is **not stable**. 
 
 Check out [this](https://www.youtube.com/watch?v=qzXAVXddcPU&ab_channel=RunTimeClips) demonstration video for better understanding.
 
@@ -464,7 +468,6 @@ Check out the code to shell sort [here](./shellSort.py).
 
 Merge Sort is a **divide-and-conquer** sorting algorithm that recursively splits a list into smaller sublists, sorts them, and then merges the sorted sublists back together to form the final sorted list.
 
----
 
 ### Key Steps of Merge Sort:
 1. **Base Case:**  
@@ -478,7 +481,6 @@ Merge Sort is a **divide-and-conquer** sorting algorithm that recursively splits
 3. **Merge:**  
    Combine the two sorted halves into a single sorted list. This is achieved by comparing the smallest elements of each half and placing the smaller element into the new list, ensuring the algorithm is **stable** (maintains the order of duplicate elements).
 
----
 
 ### Algorithm Analysis:
 1. **Splitting Phase:**  
@@ -493,7 +495,6 @@ Merge Sort is a **divide-and-conquer** sorting algorithm that recursively splits
 4. **Space Complexity:**  
    The algorithm requires **extra space** to hold the temporary sublists created during the splitting and merging phases. This can be significant for large lists.
 
----
 
 ### Code Implementation:
 [Here](./mergeSort.py) is the Python implementation of Merge Sort.
@@ -516,9 +517,11 @@ Quicksort is a **divide-and-conquer** sorting algorithm similar to merge sort bu
 
 The **partitioning** process uses two markers: `left_mark` starts at the left end, moving right until a value greater than the pivot is found, and `right_mark` starts at the right end, moving left until a value smaller than the pivot is found. These out-of-place items are then swapped. This continues until `right_mark < left_mark`, at which point the pivot is placed at the split point, and the list is recursively sorted on either side.
 
+Quick sort is **not stable**. 
+
 **Performance**:
-- **Best/Average Case**: When the pivot divides the list evenly, resulting in \(O(n \log n)\).
-- **Worst Case**: When the pivot creates unbalanced splits (e.g., sorted or reverse-sorted input), leading to \(O(n^2)\).
+- **Best/Average Case**: When the pivot divides the list evenly, resulting in $O(n \log n)$.
+- **Worst Case**: When the pivot creates unbalanced splits (e.g., sorted or reverse-sorted input), leading to $O(n^2)$.
 
 **Optimizations**: 
 - Using the **median-of-three** method to select the pivot (median of the first, middle, and last elements) reduces the likelihood of unbalanced splits, improving performance, especially for semi-sorted lists.
@@ -527,4 +530,32 @@ Checkout the implementation [here](./quickSort.py).
 
 ---
 
-# Check out the [Exercise](./Exercises.md)
+## Comparing the Sorting Algorithms
+
+Below table gives a detailed comparison of **Bubble Sort**, **Selection Sort**, **Insertion Sort**, **Shell Sort**, **Merge Sort**, and **Quick Sort** in a tabular format:
+
+| **Algorithm**       | **Time Complexity (Best Case)** | **Time Complexity (Average Case)** | **Time Complexity (Worst Case)** | **Space Complexity** | **Stability**       | **Method**                              | **Use Cases**                                    |
+|---------------------|---------------------------------|-----------------------------------|----------------------------------|----------------------|---------------------|-----------------------------------------|-------------------------------------------------|
+| **Bubble Sort**      | $O(n)$                       | $O(n^2)$                       | $O(n^2)$                      | $O(1)$             | **Stable**          | Comparison-based, adjacent element swap | Small datasets, educational purposes           |
+| **Selection Sort**   | $O(n^2)$                     | $O(n^2)$                       | $O(n^2)$                      | $O(1)$             | **Unstable**        | Selection of minimum/maximum and swap    | Small datasets, when memory writes are costly   |
+| **Insertion Sort**   | $O(n)$                       | $O(n^2)$                       | $O(n^2)$                      | $O(1)$             | **Stable**          | Insertion into a sorted sublist         | Small datasets, nearly sorted data            |
+| **Shell Sort**       | $O(n \log n)$ to $O(n^2)$  | $O(n \log n)$ to $O(n^2)$    | $O(n^2)$                      | $O(1)$             | **Unstable**        | Generalized insertion sort with gaps    | Medium-sized datasets, performance-sensitive   |
+| **Merge Sort**       | $O(n \log n)$                | $O(n \log n)$                  | $O(n \log n)$                 | $O(n)$             | **Stable**          | Divide and conquer, recursive           | Large datasets, external sorting               |
+| **Quick Sort**       | $O(n \log n)$                | $O(n \log n)$                  | $O(n^2)$                      | $O(1)$        | **Unstable**        | Divide and conquer, pivot-based partitioning | General-purpose, large datasets, performance-critical |
+
+### Explanation of Columns:
+- **Time Complexity**: Represents how the algorithm performs with respect to the size of the input (n).
+    - **Best Case**: The time complexity when the input data is sorted or nearly sorted.
+    - **Average Case**: The time complexity in a typical scenario.
+    - **Worst Case**: The time complexity when the input is ordered in a way that leads to the worst performance (e.g., reversed for some algorithms).
+  
+- **Space Complexity**: Refers to the amount of memory used by the algorithm. For in-place sorting algorithms, the space complexity is typically $O(1)$, meaning it uses a constant amount of extra space.
+
+- **Stability**: A stable sorting algorithm preserves the relative order of elements with equal keys (i.e., equal values).
+
+- **Method**: The approach or technique used by the sorting algorithm (e.g., selection, insertion, divide and conquer, etc.).
+
+- **Use Cases**: Practical scenarios where the algorithm is typically applied or preferred.
+
+---
+# Check out the [Exercises](./Exercises.md)

@@ -41,6 +41,10 @@ At what point do you think the hash table is too small? Explain.
 * merge sort
 * quicksort (you decide on the pivot value)
 
+<details>
+<summary>Click to view answer</summary>
+put the answer here
+</details>
 ---
 
 ### Consider the following list of integers: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]. Show how this list is sorted by the following algorithms:
@@ -64,7 +68,7 @@ At what point do you think the hash table is too small? Explain.
 ---
 
 ### Devise alternative strategies for choosing the pivot value in a quicksort. For example, pick the middle item. Reimplement the algorithm and then execute it on random data sets. Under what criteria does your new strategy perform better or worse than the strategy from this chapter?
-
+#### Instead of just picking the middle element, we can use median of three, which is way faster than choosing leftmost or rightmost element as pivot. Checkout the [code](./quickSort.py).
 ---
 
 ### Set up a random experiment to test the difference between a sequential search and a binary search on a list of integers.
@@ -100,7 +104,7 @@ At what point do you think the hash table is too small? Explain.
 ---
 
 ### Using a random number generator, create a list of 500 integers. Perform a benchmark analysis using some of the sorting algorithms from this chapter. What is the difference in execution speed?
-
+#### [Code](./timeitSortingComparison.py)
 ---
 
 ### A bubble sort can be modified to “bubble” in both directions. The first pass moves “up” the list, and the second pass moves “down.” This alternating pattern continues until no more passes are necessary. Implement this variation and describe under what circumstances it might be appropriate.
@@ -112,13 +116,13 @@ At what point do you think the hash table is too small? Explain.
 ---
 
 ### Implement the merge_sort function without using the slice operator.
-
+#### Checkout the method `merge_sort_index` in [Code](./mergeSort.py)
 ---
 
 ### One way to improve the quicksort is to use an insertion sort on lists that have a short length (call it the “partition limit”). Why does this make sense? Reimplement the quicksort and use it to sort a random list of integers. Perform an analysis using different list sizes for the partition limit.
-
+#### Check [this code](./quickSort.py) for quick sort, and [this](./timeitQuickSortPartitionExeperiment.py) for quick sort experiment. 
 ---
 
 ### Implement the median of three method for selecting a pivot value as a modification to quick_sort. Run an experiment to compare the two techniques.
-
+#### Check [this code](./quickSort.py) for quick sort, and [this](./timeitQuickSortPivotExeperiment.py) for quick sort experiment. 
 ---
